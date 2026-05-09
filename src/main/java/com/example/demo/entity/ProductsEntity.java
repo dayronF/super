@@ -28,6 +28,10 @@ public class ProductsEntity {
     @Column(name = "stock", nullable = false)
     @ColumnDefault("0")
     private int stock;
+    @Column(name = "category_id")
+    private Long categoryId;
+    @Column(name = "supplier_id")
+    private Long supplierId;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
