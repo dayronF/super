@@ -1,5 +1,11 @@
 package com.example.demo.repository;
 
-public class CategoryRepository {
-    
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.entity.CategoryEntity;
+
+public interface CategoryRepository extends JpaRepository<CategoryRepository, Long> {
+    Optional<CategoryEntity> findByName(String name);
 }
