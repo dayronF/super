@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class ProductResponse {
-    private Integer id;
+    private Long id;
     private String name;
     private BigDecimal price;
     private Integer stock;
