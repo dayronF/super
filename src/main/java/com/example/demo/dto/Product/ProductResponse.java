@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import lombok.Data;
 
-@Datagit 
+@Data
 public class ProductResponse {
     private Integer id;
     private String name;
