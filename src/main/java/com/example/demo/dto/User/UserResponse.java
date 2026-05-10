@@ -6,9 +6,11 @@ import lombok.Data;
 
 @Data
 public class UserResponse {
-     private Integer id;
+
+    private Long id;
     private String name;
     private String email;
-    private String role;
+    private Long role;
     private LocalDateTime createdAt;
+
 }
