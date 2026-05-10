@@ -13,15 +13,20 @@ import lombok.Data;
 @Entity
 @Table(name = "sale_items")
 public class SaleItemsEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "sale_id")
-    private int sale_id;
-    @Column(name = "sale_id")
-    private int product_id;
+    private Long saleId;
+
+    @Column(name = "product_id")
+    private Long productId;
+
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
+
     @Column(name = "unit_price", precision = 10, scale = 2)
-    private BigDecimal unit_price;
+    private BigDecimal unitPrice;
 }
