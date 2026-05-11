@@ -66,6 +66,10 @@ public class JwtService {
         return extractClaims(token, Claims::getSubject);
     }
 
+    public String extractUsername(String token) {
+    return extractClaims(token, Claims::getSubject);
+}
+
     public Long extractUserId(String token) {
         return extractClaims(token, claims -> claims.get("userId", Long.class));
     }
