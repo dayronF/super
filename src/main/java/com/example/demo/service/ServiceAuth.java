@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.Auth.LoginRequest;
-import com.example.demo.dto.Auth.LoginResponse;
+import java.util.Optional;
+import com.example.demo.dto.login.LoginRequest;
+import com.example.demo.dto.login.LoginResponse;
 import com.example.demo.dto.User.UserRequest;
 import com.example.demo.dto.User.UserResponse;
 import com.example.demo.entity.UserEntity;
@@ -12,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
