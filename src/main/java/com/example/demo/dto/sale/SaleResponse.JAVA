@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class SaleResponse {
-    private Integer id;
+    private Long id;
     private String cashierName;
     private BigDecimal total;
     private LocalDateTime createdAt;
