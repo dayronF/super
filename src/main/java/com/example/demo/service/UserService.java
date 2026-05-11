@@ -10,7 +10,6 @@ import com.example.demo.dto.User.UserMessage;
 import com.example.demo.dto.User.UserRequest;
 import com.example.demo.dto.User.UserResponse;
 import com.example.demo.entity.UserEntity;
-import com.example.demo.enums.RolEnum;
 import com.example.demo.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -30,51 +29,40 @@ public class UserService {
 
             UserResponse response = new UserResponse();
 
-            response.setId(user.getId().intValue());
+            response.setId(user.getId());
             response.setName(user.getName());
             response.setEmail(user.getEmail());
+            response.setRole(user.getRolId());
             response.setCreatedAt(user.getCreated_at());
 
-            if (user.getRolId().equals(1L)) {
-                response.setRole("ADMIN");
-            } else if (user.getRolId().equals(2L)) {
-                response.setRole("CASHIER");
-            } else {
-                response.setRole("SUPPLIER");
-            }
-
             usersR.add(response);
+
         }
 
         return usersR;
+
     }
 
     public UserResponse getById(Long id) {
 
-        Optional<UserEntity> userOptional = userRepository.findById(id);
+        Optional<UserEntity> userO = userRepository.findById(id);
 
-        if (userOptional.isEmpty()) {
+        if (userO.isEmpty()) {
             return null;
         }
 
-        UserEntity user = userOptional.get();
+        UserEntity entity = userO.get();
 
         UserResponse response = new UserResponse();
 
-        response.setId(user.getId().intValue());
-        response.setName(user.getName());
-        response.setEmail(user.getEmail());
-        response.setCreatedAt(user.getCreated_at());
-
-        if (user.getRolId().equals(1L)) {
-            response.setRole("ADMIN");
-        } else if (user.getRolId().equals(2L)) {
-            response.setRole("CASHIER");
-        } else {
-            response.setRole("SUPPLIER");
-        }
+        response.setId(entity.getId());
+        response.setName(entity.getName());
+        response.setEmail(entity.getEmail());
+        response.setRole(entity.getRolId());
+        response.setCreatedAt(entity.getCreated_at());
 
         return response;
+
     }
 
     public UserMessage create(UserRequest request) {
@@ -82,8 +70,10 @@ public class UserService {
         UserMessage message = new UserMessage();
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            message.setUserMessage("El correo ya existe");
+
+            message.setUserMessage("Ya existe un usuario con ese correo");
             return message;
+
         }
 
         UserEntity user = new UserEntity();
@@ -92,31 +82,62 @@ public class UserService {
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
 
-        RolEnum role = RolEnum.valueOf(request.getRole().toUpperCase());
-        user.setRolId(role.getId());
-
         userRepository.save(user);
 
         message.setUserMessage("Usuario creado exitosamente");
 
         return message;
+
+    }
+
+    public UserMessage update(Long id, UserRequest request) {
+
+        Optional<UserEntity> userO = userRepository.findById(id);
+
+        UserMessage message = new UserMessage();
+
+        if (userO.isEmpty()) {
+
+            message.setUserMessage("Usuario no encontrado");
+            return message;
+
+        }
+
+        UserEntity entity = userO.get();
+
+        entity.setName(request.getName());
+        entity.setEmail(request.getEmail());
+        entity.setPassword(request.getPassword());
+
+        userRepository.save(entity);
+
+        message.setUserMessage("Usuario actualizado correctamente");
+
+        return message;
+
     }
 
     public UserMessage delete(Long id) {
 
+        Optional<UserEntity> userO = userRepository.findById(id);
+
         UserMessage message = new UserMessage();
 
-        Optional<UserEntity> userOptional = userRepository.findById(id);
+        if (userO.isEmpty()) {
 
-        if (userOptional.isEmpty()) {
             message.setUserMessage("Usuario no encontrado");
             return message;
+
         }
 
-        userRepository.delete(userOptional.get());
+        UserEntity entity = userO.get();
+
+        userRepository.delete(entity);
 
         message.setUserMessage("Usuario eliminado correctamente");
 
         return message;
+
     }
+
 }

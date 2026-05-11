@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class SaleItemResponse {
-     private Integer id;
+     private Long id;
     private String productName;
     private Integer quantity;
     private BigDecimal unitPrice;

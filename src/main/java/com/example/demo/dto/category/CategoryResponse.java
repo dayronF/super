@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 
 public class CategoryResponse {
-    private Integer id;
+    private Long id;
     private String name;
     private List<ProductResponse> products;
 
