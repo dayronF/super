@@ -4,7 +4,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.demo.filter.JwtValidationFilter;
+import com.example.demo.Filter.JwtValidationFilter;
 
 @Configuration
 public class FilterConfig {
